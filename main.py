@@ -1,6 +1,12 @@
-from TrolleyBus import TrolleyBus
+"""main"""
+from trolleybus import Trolleybus
 
-trolleybus = TrolleyBus()
-trolleybus2 = TrolleyBus(42, 10, "Lviv", 120, 60, 20, 10)
-print(trolleybus)
-print(trolleybus2)
+
+trolleybuses = {
+    Trolleybus(),
+    Trolleybus(42, 10, "Lviv", 120, 60, 20, 10),
+    Trolleybus.get_instance(),
+    Trolleybus.get_instance(),
+}
+for transport in trolleybuses:
+    print(transport)
