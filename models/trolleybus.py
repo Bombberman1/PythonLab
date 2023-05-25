@@ -1,22 +1,25 @@
 """classes"""
+from .transport import Transport
 
 
-class Trolleybus:
-    """trolleybus"""
+class Trolleybus(Transport):
+    """Trolleybus"""
 
     instance = None
 
     # pylint: disable=too-many-arguments
-    def __init__(self, identifier=150, route_number=0, current_stop=None,
-                 max_speed=0, current_speed=0, capacity=0,
+    def __init__(self, identifier=150, max_speed=0, current_speed=0,
+                 route_number=0, current_stop="", capacity=0,
                  passengers=0):
-        self.identifier = identifier
+        super().__init__(identifier, max_speed, current_speed)
         self.route_number = route_number
         self.current_stop = current_stop
-        self.max_speed = max_speed
-        self.current_speed = current_speed
         self.capacity = capacity
         self.passengers = passengers
+
+    def accelerate(self, speed):
+        """changing current_speed"""
+        super().current_speed = speed
 
     @classmethod
     def get_instance(cls):
@@ -27,11 +30,11 @@ class Trolleybus:
 
     def stop(self):
         """set speed 0"""
-        self.current_speed = 0
+        super().current_speed = 0
 
     def start(self):
         """set speed 20"""
-        self.current_speed = 20
+        super().current_speed = 20
 
     def add_passenger(self):
         """set passengers +1"""
@@ -44,5 +47,6 @@ class Trolleybus:
             self.passengers -= 1
 
     def __str__(self):
-        return f"{self.identifier} {self.route_number} {self.current_stop} {self.max_speed} " \
-               f"{self.current_speed} {self.capacity} {self.passengers}"
+        return f"{self.identifier} {self.max_speed} {self.current_speed} " \
+               f"{self.route_number} {self.current_stop} {self.capacity} " \
+               f"{self.passengers}"
