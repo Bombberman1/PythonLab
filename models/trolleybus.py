@@ -5,6 +5,8 @@ from .transport import Transport
 class Trolleybus(Transport):
     """Trolleybus"""
 
+    transport_marks = {"Solaris", "Electron"}
+
     instance = None
 
     # pylint: disable=too-many-arguments
@@ -19,7 +21,7 @@ class Trolleybus(Transport):
 
     def accelerate(self, speed):
         """changing current_speed"""
-        super().current_speed = speed
+        self.current_speed = speed
 
     @classmethod
     def get_instance(cls):
@@ -30,11 +32,11 @@ class Trolleybus(Transport):
 
     def stop(self):
         """set speed 0"""
-        super().current_speed = 0
+        self.current_speed = 0
 
     def start(self):
         """set speed 20"""
-        super().current_speed = 20
+        self.current_speed = 20
 
     def add_passenger(self):
         """set passengers +1"""
@@ -47,6 +49,11 @@ class Trolleybus(Transport):
             self.passengers -= 1
 
     def __str__(self):
+        return f"{self.identifier} {self.max_speed} {self.current_speed} " \
+               f"{self.route_number} {self.current_stop} {self.capacity} " \
+               f"{self.passengers}"
+
+    def __repr__(self):
         return f"{self.identifier} {self.max_speed} {self.current_speed} " \
                f"{self.route_number} {self.current_stop} {self.capacity} " \
                f"{self.passengers}"

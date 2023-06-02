@@ -5,6 +5,8 @@ from .transport import Transport
 class Car(Transport):
     """Car"""
 
+    transport_marks = {"Audi", "Jaguar", "Ford", "Chevrolet"}
+
     # pylint: disable=too-many-arguments
     def __init__(self, identifier=0, max_speed=0, current_speed=0,
                  doors=0, trunk_volume=0, max_weight=0,
@@ -17,9 +19,14 @@ class Car(Transport):
 
     def accelerate(self, speed):
         """changing current_speed"""
-        super().current_speed = speed
+        self.current_speed = speed
 
     def __str__(self):
+        return f"{self.identifier} {self.max_speed} {self.current_speed} " \
+               f"{self.doors} {self.trunk_volume} {self.max_weight} " \
+               f"{self.current_weight}"
+
+    def __repr__(self):
         return f"{self.identifier} {self.max_speed} {self.current_speed} " \
                f"{self.doors} {self.trunk_volume} {self.max_weight} " \
                f"{self.current_weight}"
