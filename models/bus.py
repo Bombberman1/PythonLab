@@ -1,4 +1,6 @@
 """classes"""
+from decorators.logged import logged
+from exceptions.acceleration import OutOfLimitsError
 from .transport import Transport
 
 
@@ -12,8 +14,11 @@ class Bus(Transport):
         super().__init__(identifier, max_speed, current_speed)
         self.windows = windows
 
+    @logged(OutOfLimitsError, "console")
     def accelerate(self, speed):
         """changing current_speed"""
+        if speed > self.max_speed or speed < 0:
+            raise OutOfLimitsError(speed)
         self.current_speed = speed
 
     def __str__(self):
