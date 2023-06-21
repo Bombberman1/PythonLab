@@ -13,12 +13,14 @@ class SetManager:
                    in self.transport_manager.transports)
 
     def __iter__(self):
+        self.next_id = -1
         return self
 
     def __next__(self):
         self.next_id += 1
         if self.next_id >= len(self):
-            self.next_id = 0
+            self.next_id = -1
+            raise StopIteration
         return [mark for transport in self.transport_manager.transports
                 for mark in transport.transport_marks][self.next_id]
 
